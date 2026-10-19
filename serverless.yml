@@ -1,0 +1,38 @@
+service: canlas-payroll-api
+
+provider:
+  name: aws
+  region: ap-southeast-2
+  runtime: php-82-fpm
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+          Resource: "arn:aws:s3:::canlas-bref-payroll-payslips/payslips/*"
+  environment:
+    S3_BUCKET_NAME: canlas-bref-payroll-payslips
+    AWS_REGION_NAME: ap-southeast-2
+
+plugins:
+  - ./vendor/bref/bref
+
+functions:
+  api:
+    handler: public/index.php
+    description: 'PHP API for Employee and Payroll Records - Andrik Brenth Canlas'
+    timeout: 28
+    memorySize: 512
+    events:
+      - httpApi: '*'
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!tests/**'
+    - '!*.png'
+    - '!*.js'
+    - '!*.txt'
+    - '!.git/**'

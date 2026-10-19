@@ -1,0 +1,22 @@
+{
+    "name": "canlas/bref-payroll-api",
+    "description": "AWS Lambda Bref PHP Employee and Payroll API",
+    "type": "project",
+    "require": {
+        "php": ">=8.2",
+        "bref/bref": "^2.1",
+        "bramus/router": "^1.6",
+        "dompdf/dompdf": "^3.0",
+        "aws/aws-sdk-php": "^3.300"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "config": {
+        "audit": {
+            "block": false
+        }
+    }
+}
